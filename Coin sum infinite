@@ -1,0 +1,17 @@
+public class Solution {
+    public int coinchange2(int[] A, int B) {
+        
+        int[] dp = new int[B+1];
+        int n = A.length;
+        dp[0] = 1;
+        for (int i = 0; i<n; i++)
+        {
+            for(int j = A[i]; j<=B; j++)
+            {
+                dp[j] += dp[j-A[i]];
+                dp[j] %= 1000007;
+            }
+        }
+        return dp[B];
+    }
+}
