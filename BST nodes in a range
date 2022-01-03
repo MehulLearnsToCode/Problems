@@ -1,0 +1,21 @@
+public class Solution {
+    public int solve(TreeNode A, int B, int C) {
+        List<Integer> ansVect = new ArrayList<Integer>();
+        BSTtoVector(A, ansVect, B, C);
+        return ansVect.size();
+    }
+
+    public void BSTtoVector(TreeNode root, List<Integer> ans, int b, int c)
+    {
+        if(root == null)
+            return;
+
+        if(root.val >= b && root.val <= c)
+        {
+            ans.add(root.val);
+        }
+        BSTtoVector(root.left, ans, b, c);
+        BSTtoVector(root.right, ans, b, c);
+    }
+
+}
