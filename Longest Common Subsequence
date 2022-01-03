@@ -1,0 +1,29 @@
+public class Solution {
+    public int solve(String A, String B) {
+        char[] Str1 = A.toCharArray();
+        char[] Str2 = B.toCharArray();
+        int m = A.length();
+        int n = B.length();
+        int ans = LCS(Str1, Str2, m, n);
+        return ans;
+    }
+    
+    public int LCS(char[] X, char[] Y, int m, int n)
+    {
+        int[][] LArray = new int[m+1][n+1];
+        
+        for(int i = 0; i<=m; ++i)
+        {
+            for (int j = 0; j<=n; ++j)
+            {
+                if(i == 0 || j == 0)
+                LArray[i][j] = 0;
+                else if (X[i-1] == Y[j-1])
+                LArray[i][j] = LArray[i-1][j-1]+1;
+                else
+                LArray[i][j] = Math.max(LArray[i-1][j],LArray[i][j-1]);
+            }
+        }
+        return LArray[m][n];
+    }
+}
