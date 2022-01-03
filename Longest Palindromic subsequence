@@ -1,0 +1,42 @@
+public class Solution {
+    public int solve(String A) {
+        StringBuilder sb = new StringBuilder();
+        String B;
+        sb.append(A);
+        sb.reverse();
+        B = sb.toString();
+        int ans;
+
+        ans = LCS(A,B);
+        return ans;
+    }
+    public int LCS(String A, String B)
+    {
+        char[] X = A.toCharArray();
+        char[] Y = B.toCharArray();
+
+        int n = X.length;
+        int m = Y.length;
+
+        int[][] dpArr = new int[n+1][m+1];
+        for(int i =0; i<=n; i++)
+        {
+            for(int j = 0; j<=m; j++)
+            {
+                if(i ==0 || j==0)
+                {
+                    dpArr[i][j] = 0;
+                }
+                else if(X[i-1] == Y[j-1])
+                {
+                    dpArr[i][j] = 1+dpArr[i-1][j-1];
+                }
+                else
+                {
+                    dpArr[i][j]=Math.max(dpArr[i-1][j], dpArr[i][j-1]);
+                }
+            }
+        }
+        return dpArr[n][m];
+    }
+}
