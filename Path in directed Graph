@@ -1,0 +1,24 @@
+bool dfs(int start, int end, vector<vector<int>> &graph, vector<bool> &visited)
+{
+    visited[start] = true;
+    if(start == end) return true;
+    for(int i = 0; i < graph[start].size(); ++i)
+    {
+        if(!visited[graph[start][i]])
+        {
+            if(dfs(graph[start][i], end, graph, visited)) return true;
+        }
+    }
+    return false;
+}
+
+int Solution::solve(int A, vector<vector<int> > &B) {
+    vector<vector<int>> ConnectedNodes(A+1);
+    for(int i = 0; i < B.size(); ++i)
+    {
+        ConnectedNodes[B[i][0]].push_back(B[i][1]);
+    }
+
+    vector<bool> visited(A+1, false);
+    return dfs(1, A, ConnectedNodes, visited);
+}
