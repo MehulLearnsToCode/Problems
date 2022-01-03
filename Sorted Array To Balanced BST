@@ -1,0 +1,25 @@
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public TreeNode sortedArrayToBST(final int[] A) {
+        int n = A.length;
+
+        TreeNode root = MakeBST(A, 0, n-1);
+        return root;
+
+    }
+
+    public TreeNode MakeBST(int[] A, int start, int end)
+    {
+        if(start>end)
+        {
+            return null;
+        }
+        int mid = (start + end)/2;
+
+        TreeNode node = new TreeNode(A[mid]);
+        node.left = MakeBST(A, start, mid-1);
+        node.right = MakeBST(A, mid+1, end);
+        
+        return node;
+    }
+}
