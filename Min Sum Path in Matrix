@@ -1,0 +1,26 @@
+public class Solution {
+    public int minPathSum(int[][] A) {
+        int row = A.length;
+        int col = A[0].length;
+        int[][] dpArr = new int [row][col];
+        dpArr[0][0] = A[0][0];
+        
+        for(int i =1; i<row; ++i)
+        {
+            dpArr[i][0] = dpArr[i-1][0] + A[i][0];
+        }
+        for(int j = 1; j<col; ++j)
+        {
+            dpArr[0][j] = dpArr[0][j-1] + A[0][j];
+        }
+        
+        for(int i = 1; i<row; i++)
+        {
+            for(int j = 1; j<col; j++)
+            {
+                dpArr[i][j] = Math.min((dpArr[i-1][j]+A[i][j]), (dpArr[i][j-1]+A[i][j]));
+            }
+        }
+        return dpArr[row-1][col-1];
+    }
+}
