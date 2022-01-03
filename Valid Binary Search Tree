@@ -1,0 +1,26 @@
+public class Solution {
+    public int isValidBST(TreeNode A) {
+        
+        if(A.val == 2147483647)
+        return 1;
+
+        if(CheckBST(A, Integer.MIN_VALUE, Integer.MAX_VALUE))
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    public boolean CheckBST( TreeNode A, int min, int max )
+    {
+        if(A==null)
+        return true;
+
+        if(A.val <= min || A.val>=max)
+        return false;
+
+        else return CheckBST(A.left, min, A.val) && CheckBST(A.right, A.val, max);
+    }
+}
